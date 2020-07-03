@@ -50,7 +50,7 @@ def Table(): ##create a canvas and fill it with all participants in game
     for i in range(2): 
         e = tk.Label(teamWindow, text = "Team " + str(i + 1), width=20, fg =("blue","red")[i == 0], font=('Arial',16,'bold')) 
         
-        e.grid(row = 0, column = i, sticky = (tk.W, tk.E)[i is 0])
+        e.grid(row = 0, column = i, sticky = (tk.W, tk.E)[i == 0])
         for j in range(5):  
             e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), width=20, fg=("blue","red")[i == 0], font=('Arial',16,'bold'), anchor=('w','e')[i == 0]) 
             e.bind('<Enter>', on_enter) ##when mouse hovers over name
