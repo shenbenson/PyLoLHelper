@@ -2,7 +2,7 @@ import tkinter as tk
 
 def updateCoolDowns(level):
         print("user selected " + str(level))
-
+## testing
 def importData(tipsAgainst, coolDowns): ##insert data about champion into here
         t = tk.Label(tipsAgainst, text="Tips against playing " + "DATA")
         t.grid(row = 0, column = 0)
