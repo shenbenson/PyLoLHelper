@@ -2,7 +2,7 @@ import tkinter as tk
 
 def updateCoolDowns(level):
         print("user selected " + str(level))
-## testing
+
 def importData(tipsAgainst, coolDowns): ##insert data about champion into here
         t = tk.Label(tipsAgainst, text="Tips against playing " + "DATA")
         t.grid(row = 0, column = 0)
@@ -48,11 +48,11 @@ def on_exit(event): ##when mouse leaves button
 def Table(): ##create a canvas and fill it with all participants in game
 
     for i in range(2): 
-        e = tk.Label(teamWindow, text = "Team " + str(i + 1), width=20, fg =("blue","red")[i is 0], font=('Arial',16,'bold')) 
+        e = tk.Label(teamWindow, text = "Team " + str(i + 1), width=20, fg =("blue","red")[i == 0], font=('Arial',16,'bold')) 
         
         e.grid(row = 0, column = i, sticky = (tk.W, tk.E)[i is 0])
         for j in range(5):  
-            e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), width=20, fg=("blue","red")[i is 0], font=('Arial',16,'bold'), anchor=('w','e')[i is 0]) 
+            e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), width=20, fg=("blue","red")[i == 0], font=('Arial',16,'bold'), anchor=('w','e')[i == 0]) 
             e.bind('<Enter>', on_enter) ##when mouse hovers over name
             e.bind('<Button-1>', viewPlayer) ##when mouse clicks name
             e.bind('<Leave>', on_exit) ##when mouse leaves name
