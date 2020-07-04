@@ -55,11 +55,11 @@ def on_exit(event): ##when mouse leaves button
 def Table(): ##create a canvas and fill it with all participants in game
 
     for i in range(2): 
-        e = tk.Label(teamWindow, text = "Team " + str(i + 1), width=20, fg =("blue","red")[i == 0], font=('Arial',16,'bold')) 
+        e = tk.Label(teamWindow, text = "Team " + str(i + 1), width=19, fg =("blue","red")[i == 0], font=('Arial',16,'bold')) 
         
         e.grid(row = 0, column = i, sticky = (tk.W, tk.E)[i == 0])
         for j in range(5):  
-            e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), width=20, fg="gray", font=('Arial',16,'bold')) # anchor=('w','e')[i == 0]
+            e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), width=19, fg="gray", font=('Arial',16,'bold')) # anchor=('w','e')[i == 0]
             e.bind('<Enter>', (on_enter_red, on_enter_blue)[i == 1]) ##when mouse hovers over name
             e.bind('<Button-1>', viewPlayer) ##when mouse clicks name
             e.bind('<Leave>', on_exit) ##when mouse leaves name
@@ -83,27 +83,27 @@ def quit () :
 root = tk.Tk()
 root.title("PyLoLHelper - Search Page")
 
-searchWindow = tk.Canvas(root, width = 600, height = 300)
+searchWindow = tk.Canvas(root, width = 500, height = 300)
 searchWindow.pack()
 title = tk.Label(root, fg="blue", font=("Impact", 24, 'bold'), text="PyLoLHelper")
-searchWindow.create_window(300, 20, window=title)
+searchWindow.create_window(250, 20, window=title)
 try:
     logo = tk.PhotoImage(file="logo.gif")
-    searchWindow.create_window(300,110, window=tk.Label(root, image=logo))
+    searchWindow.create_window(250,110, window=tk.Label(root, image=logo))
 except:
     print("Logo.gif must be in same folder as python file!")
 ##search bar and submit button
 entry1 = tk.Entry (root) 
-searchWindow.create_window(300, 200, window=entry1)
+searchWindow.create_window(250, 200, window=entry1)
 textOutput = tk.StringVar()
 label1 = tk.Label(root, textvariable = textOutput)
 
-searchWindow.create_window(300, 270, window=label1)
+searchWindow.create_window(250, 270, window=label1)
 
 
 
 button1 = tk.Button(text='Search for Summoner', command=getSummoner)
-searchWindow.create_window(300, 220, window=button1)
+searchWindow.create_window(250, 230, window=button1)
 """
 quitButton = tk.Button(root, text='Quit', command=quit)
 quitButton.pack()
