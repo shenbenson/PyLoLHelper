@@ -40,11 +40,17 @@ def viewPlayer(event): ##create second window to view player and champion
     importData(tipsAgainst, coolDowns)
     root2.mainloop()
 
-def on_enter(event): ##when mouse hovers over button
-    event.widget["background"] = "purple"
+def on_enter_red(event): ##when mouse hovers over button
+    event.widget["fg"] = "white"
+    event.widget["bg"] = "red"
+
+def on_enter_blue(event): ##when mouse hovers over button
+    event.widget["fg"] = "white"
+    event.widget["bg"] = "blue"
 
 def on_exit(event): ##when mouse leaves button
-    event.widget["background"] = "SystemButtonFace"
+    event.widget["fg"] = "gray"
+    event.widget["bg"] = "SystemButtonFace"
 
 def Table(): ##create a canvas and fill it with all participants in game
 
@@ -53,8 +59,8 @@ def Table(): ##create a canvas and fill it with all participants in game
         
         e.grid(row = 0, column = i, sticky = (tk.W, tk.E)[i == 0])
         for j in range(5):  
-            e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), width=20, fg=("blue","red")[i == 0], font=('Arial',16,'bold'), anchor=('w','e')[i == 0]) 
-            e.bind('<Enter>', on_enter) ##when mouse hovers over name
+            e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), width=20, fg="gray", font=('Arial',16,'bold')) # anchor=('w','e')[i == 0]
+            e.bind('<Enter>', (on_enter_red, on_enter_blue)[i == 1]) ##when mouse hovers over name
             e.bind('<Button-1>', viewPlayer) ##when mouse clicks name
             e.bind('<Leave>', on_exit) ##when mouse leaves name
             e.grid(row=j + 1, column = i)
@@ -77,29 +83,31 @@ def quit () :
 root = tk.Tk()
 root.title("PyLoLHelper - Search Page")
 
-searchWindow = tk.Canvas(root, width = 400, height = 300)
+searchWindow = tk.Canvas(root, width = 600, height = 300)
 searchWindow.pack()
 title = tk.Label(root, fg="blue", font=("Impact", 24, 'bold'), text="PyLoLHelper")
-searchWindow.create_window(200, 20, window=title)
+searchWindow.create_window(300, 20, window=title)
 try:
     logo = tk.PhotoImage(file="logo.gif")
-    searchWindow.create_window(200,110, window=tk.Label(root, image=logo))
+    searchWindow.create_window(300,110, window=tk.Label(root, image=logo))
 except:
     print("Logo.gif must be in same folder as python file!")
 ##search bar and submit button
 entry1 = tk.Entry (root) 
-searchWindow.create_window(200, 200, window=entry1)
+searchWindow.create_window(300, 200, window=entry1)
 textOutput = tk.StringVar()
 label1 = tk.Label(root, textvariable = textOutput)
 
-searchWindow.create_window(200, 270, window=label1)
+searchWindow.create_window(300, 270, window=label1)
 
 
 
 button1 = tk.Button(text='Search for Summoner', command=getSummoner)
-searchWindow.create_window(200, 220, window=button1)
+searchWindow.create_window(300, 220, window=button1)
+"""
 quitButton = tk.Button(root, text='Quit', command=quit)
 quitButton.pack()
+"""
 teamWindow = tk.Canvas(root, width = 400, height = 300)
 
 
