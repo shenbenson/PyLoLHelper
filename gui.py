@@ -75,6 +75,8 @@ def getSummoner ():  ##search function, if error then except
     except ValueError: ## if search cannot find summoner, execute
         textOutput.set("Error summoner not found")
 
+    searchWindow.pack_forget()
+
 def quit () :
     root.destroy()
     exit()
@@ -82,11 +84,12 @@ def quit () :
 
 root = tk.Tk()
 root.title("PyLoLHelper - Search Page")
+title = tk.Label(root, fg="blue", font=("Impact", 24, 'bold'), text="PyLoLHelper")
+title.pack()
 
 searchWindow = tk.Canvas(root, width = 500, height = 300)
 searchWindow.pack()
-title = tk.Label(root, fg="blue", font=("Impact", 24, 'bold'), text="PyLoLHelper")
-searchWindow.create_window(250, 20, window=title)
+
 try:
     logo = tk.PhotoImage(file="logo.gif")
     searchWindow.create_window(250,110, window=tk.Label(root, image=logo))
