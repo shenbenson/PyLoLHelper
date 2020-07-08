@@ -59,7 +59,7 @@ def Table(): ##create a canvas and fill it with all participants in game
         
         e.grid(row = 0, column = i, sticky = (tk.W, tk.E)[i == 0])
         for j in range(5):  
-            e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), width=19, fg="gray", font=('Arial',16,'bold')) # anchor=('w','e')[i == 0]
+            e = tk.Label(teamWindow, text= "Player " + str(i * 5 + j), relief = "solid", highlightcolor="blue", width=19, fg="gray", font=('Arial',16,'bold')) # anchor=('w','e')[i == 0]
             e.bind('<Enter>', (on_enter_red, on_enter_blue)[i == 1]) ##when mouse hovers over name
             e.bind('<Button-1>', viewPlayer) ##when mouse clicks name
             e.bind('<Leave>', on_exit) ##when mouse leaves name
@@ -71,11 +71,14 @@ def getSummoner ():  ##search function, if error then except
     x1 = entry1.get()
     try:
         textOutput.set("Searched for Summoner:" + " " + x1)
+        label1 = tk.Label(root, textvariable= textOutput)
+        label1.pack()
         t = Table()
     except ValueError: ## if search cannot find summoner, execute
         textOutput.set("Error summoner not found")
 
     searchWindow.pack_forget()
+    
 
 def quit () :
     root.destroy()
@@ -99,14 +102,13 @@ except:
 entry1 = tk.Entry (root) 
 searchWindow.create_window(250, 200, window=entry1)
 textOutput = tk.StringVar()
-label1 = tk.Label(root, textvariable = textOutput)
-
-searchWindow.create_window(250, 270, window=label1)
 
 
 
-button1 = tk.Button(text='Search for Summoner', command=getSummoner)
-searchWindow.create_window(250, 230, window=button1)
+
+searchButton = tk.PhotoImage(file="searchButton.png")
+button1 = tk.Button(image=searchButton, command=getSummoner)
+searchWindow.create_window(300, 200, window=button1)
 """
 quitButton = tk.Button(root, text='Quit', command=quit)
 quitButton.pack()
