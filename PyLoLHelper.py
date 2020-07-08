@@ -24,20 +24,23 @@ def get_tips_against(champion):
             print(str(count + 1) + ". " + tips)
 
 
-api_key = "RGAPI-0ddfe419-162d-490e-847e-c44cbf8049bf"
+api_key = "RGAPI-9bf8dcbc-653a-4b9d-b8f7-5d5a440f134d"
 
 summoner = input("Your summoner name: ")
 
-with urllib.request.urlopen(
-        "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summoner + "?api_key=" + api_key) as url:
-    userID = json.loads(url.read().decode())["id"]
+try:
+    with urllib.request.urlopen(
+            "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summoner + "?api_key=" + api_key) as url:
+        userID = json.loads(url.read().decode())["id"]
 
-with urllib.request.urlopen(
-        "https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" + userID + "?api_key=" + api_key) as url:
-    for count, player in enumerate(json.loads(url.read().decode())["participants"]):
-        if count == 0:
-            print("\nTeam 1:")
-        elif count == 5:
-            print("\nTeam 2:")
-        print(player["summonerName"] + " (" + get_champ(player["championId"], version) + ")")
-        get_tips_against(get_champ(player["championId"], version))
+    with urllib.request.urlopen(
+            "https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" + userID + "?api_key=" + api_key) as url:
+        for count, player in enumerate(json.loads(url.read().decode())["participants"]):
+            if count == 0:
+                print("\nTeam 1:")
+            elif count == 5:
+                print("\nTeam 2:")
+            print(player["summonerName"] + " (" + get_champ(player["championId"], version) + ")")
+            get_tips_against(get_champ(player["championId"], version))
+except urllib.error.HTTPError:
+    print("The summoner you searched for is not in an active game")
