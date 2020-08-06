@@ -19,14 +19,19 @@ def get_tips_against(champion):
             "http://ddragon.leagueoflegends.com/cdn/" + version + "/data/en_US/champion/" + champion + ".json") as url:
         data = json.loads(url.read().decode())
 
-        print("Tips when playing against " + champion)
+        tip = {}
+
         for count, tips in enumerate(data["data"][champion]["enemytips"]):
-            print(str(count + 1) + ". " + tips)
+            name = champion + str(count + 1)
+            tip[name] = str(count + 1) + ". " + tips
+        
+        return tip
 
 
-api_key = "RGAPI-9bf8dcbc-653a-4b9d-b8f7-5d5a440f134d"
+api_key = "RGAPI-0fff7715-4966-4372-87d5-249ffcc6f9a3"
 
 summoner = input("Your summoner name: ")
+tips = {}
 
 try:
     with urllib.request.urlopen(
@@ -41,6 +46,6 @@ try:
             elif count == 5:
                 print("\nTeam 2:")
             print(player["summonerName"] + " (" + get_champ(player["championId"], version) + ")")
-            get_tips_against(get_champ(player["championId"], version))
+            tips = get_tips_against(get_champ(player["championId"], version))
 except urllib.error.HTTPError:
     print("The summoner you searched for is not in an active game")
