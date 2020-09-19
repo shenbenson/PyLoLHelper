@@ -1,6 +1,6 @@
 # PyLoLHelper
 
-** Description required **
+** App Under Construction **
 
 ### Collaborators: 
 * https://github.com/kensonhui
